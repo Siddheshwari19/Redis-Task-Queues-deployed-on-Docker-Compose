@@ -2,7 +2,7 @@ from flask import Flask
 import requests
 import redis
 from rq import Queue
-from api import getCatImage
+from api import Image
 
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ q = Queue(connection=r)
 @app.route('/')
 def index():
 
-    task = q.enqueue(getCatImage, 5)
+    task = q.enqueue(Image, 5)
     n = len(q.jobs)
 
     html = '<center><br /><br />'
